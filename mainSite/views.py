@@ -111,6 +111,9 @@ def voterView(request):
 
 @login_required
 def register(request):
+	"""Enables registering of candidates. 
+	Only candidates who can vote can register. A user can register only once for a post in gymkhana.
+	Returns list of posts for which a candidate can register if he is eligible.""" 
 	if len(Users.objects.filter(username=request.user.username)) == 0:
 		return HttpResponse("Only people who can vote are eligible for candidature.")
 	if len(Candidates.objects.filter(username=request.user.username)) != 0:
@@ -127,6 +130,9 @@ def register(request):
 
 @login_required
 def registrationform(request):
+	"""Form for each post is displayed dynamically. 
+	The data from each field is converted into json string and stored in Candidate model.
+	When request is GET form is diplayed and when request if POST form is submitted."""
 	if(request.method=='GET') :
 		if len(Users.objects.filter(username=request.user.username)) == 0:
 			return HttpResponse("Only people who can vote are eligible for candidature.")
@@ -199,6 +205,8 @@ def adminHome(request):
 
 @login_required
 def create_form(request):
+	"""This view displays the list of posts for which forms can be created.
+	Also new post can be added."""
 	if len(Users.objects.filter(username=request.user.username)) != 0:
 		return HttpResponse('Only administrators are allwoed to access this page!')
 	post_i = Posts.objects.all()
@@ -209,6 +217,7 @@ def create_form(request):
 
 @login_required
 def add_form_details(request):
+	"""Displays existing fields in the form of selected post"""
 	if len(Users.objects.filter(username=request.user.username)) != 0:
 		return HttpResponse('Only administrators are allwoed to access this page!')
 	global post1
@@ -227,6 +236,8 @@ def add_form_details(request):
 
 @login_required
 def add_fields(request):
+	"""New fields can be added. For each field, name, fieldType, Placholder and validation are required.
+	Validation value has to be a valid regex for the form to be accepted."""
 	if len(Users.objects.filter(username=request.user.username)) != 0:
 		return HttpResponse('Only administrators are allwoed to access this page!')
 	flag = 0
@@ -266,6 +277,7 @@ def add_fields(request):
 
 @login_required
 def add_post(request):
+	"""The view is called form create_form view. Post can be added to the existing model Posts"""
 	if len(Users.objects.filter(username=request.user.username)) != 0:
 		return HttpResponse('Only administrators are allwoed to access this page!')
 	if request.method == "GET":
@@ -343,6 +355,8 @@ def view_candidate_information(request):
 	return render(request, 'view-candidate-information.html', {'details': detailsList1, 'photo': candidate_photo, 'username': candidate_username, 'candidateName': candidate_name, 'isAdmin': isAdmin, 'isApproved': isApproved})
 
 def view_candidate_list(request):
+	"""The view returns a list of the candidates seperated by their post.
+	These candidates are only those approved by the admin"""
 	if not request.method == "GET":
 		raise IOError
 	candidates = Candidates.objects.all()
