@@ -1,4 +1,3 @@
-<!--This page displays list of posts for form to be created -->
 {% extends "blank-page.html" %}
 {% block content %}
 <script type="text/javascript" language="javascript">

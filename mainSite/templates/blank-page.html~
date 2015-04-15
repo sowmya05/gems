@@ -1,4 +1,3 @@
-<!-- This is the base template for rest of the html pages. -->
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">

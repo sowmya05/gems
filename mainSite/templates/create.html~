@@ -1,4 +1,4 @@
-
+<!-- This page displays list of posts for form to be created -->
 {% extends "blank-page.html" %}
 {% block content %}
 <form action="/gems/adminHome/create-form/create" method="get">

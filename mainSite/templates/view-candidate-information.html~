@@ -1,5 +1,3 @@
-<!-- Details about each candidated are displayed.
-Somewhat like a profile page for each candidate. Their agenda is also uploaded -->
 {% extends "blank-page.html" %}
 {% block content %}
 

@@ -1,4 +1,3 @@
-<!-- Displays the form for each post. The form is dynamic in nature. -->
 {% extends "blank-page.html" %}
 {% block content %}
 
